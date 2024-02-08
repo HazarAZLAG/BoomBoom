@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="./assets/css/style.css">
 </head>
 <body>
+    <!-- Modification -->
     <div id="logo">
         <img src="assets/img/logo application boomboom2.png" alt="">
     </div>
