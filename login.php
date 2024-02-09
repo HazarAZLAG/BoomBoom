@@ -11,17 +11,17 @@ if (isset($_POST["submited"])) {
     $password = $_POST['password']; // mot de passe en clair
     // me permet de tester si l'email envoyer dans mon formulaire
     // existe dans ma base de données
-    $rq = "SELECT * FROM `user` WHERE email = '$email'"; 
-    
+    $rq = "SELECT * FROM `user` WHERE email = '$email'";
+
     $results = $pdo->prepare($rq);
     $results->execute();
     $results = $results->fetch();
-    if($results>0){
+    if ($results > 0) {
         // password_verify(password, hash) returne boolean
         $passwordVerif = $results['password']; //mot de passe hashé qui vient de ma base de donnée 
-        if(password_verify($password, $passwordVerif)){
+        if (password_verify($password, $passwordVerif)) {
             header("Location: Match.php?email=$email");
-        } else{
+        } else {
             $error = "Password incorrects...";
         }
     } else {
@@ -42,6 +42,9 @@ if (isset($_POST["submited"])) {
 </head>
 
 <body>
+    <header>
+        <?php include("./inc/menu.php"); ?>
+    </header>
     Hello world
     <?php
     /* Ici je déclare une variable avec le signe $ attaché */
@@ -69,7 +72,7 @@ if (isset($_POST["submited"])) {
         </div>
     </form>
     <div>
-        <?php echo($error); ?>
+        <?php echo ($error); ?>
     </div>
 </body>
 

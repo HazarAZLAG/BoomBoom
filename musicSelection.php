@@ -12,23 +12,24 @@ if (isset($_POST['email'])) {
     $profil = $_POST['profil'];
     $tags = $_POST['tags'];
     // securité
-    //1verfi un compte email est-il déjà register?
-    $rq2 = "SELECT * FROM user WHERE email = '$email'";
+    // 1ere verif ce compte email est-il deja enregistré??
+    $rq2 = "SELECT * FROM `user` WHERE email = '$email'";
     $read = $pdo->prepare($rq2);
     $read->execute();
     $result = $read->fetch();
 
-    //etape 2 hasher mon password password_hash('password', PASSWORD_ARGON2I) ou PASSWORD_BCRYPT
+    // 2e etape hasher mon password PASSWORD_ARGON2I ou PASSWORD_BCRYPT
     $password = password_hash($password, PASSWORD_ARGON2I);
+
     var_dump($result);
     // die();
     if ($result === false) {
-        $rq = "INSERT INTO user('email', 'password', 'nom', 'prenom', 'age', 'sexe', 'telephone', 'adresse', 'profil', 'tags') 
+        $rq = "INSERT INTO `user`(`email`, `password`, `nom`, `prenom`, `age`, `sexe`, `telephone`, `adresse`, `profil`, `tags`) 
     VALUES ('$email','$password','$nom','$prenom','$age','$sexe','$telephone','$adresse','$profil','$tags')";
         $create = $pdo->prepare($rq);
         $create->execute();
     } else {
-        header("Location:login.php");
+        header("Location: login.php");
     }
 }
 
